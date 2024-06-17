@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="Home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        /* Basic CSS for navigation and dropdown */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .header2 {
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Ensure content wraps properly on small screens */
+        }
+
+        .logo img {
+            width: 100px; /* Adjust as per your logo size */
+        }
+
+        .main-nav {
+            flex: 1; /* Takes remaining space */
+            text-align: center; /* Center align items on small screens */
+            margin-top: 10px; /* Adjust spacing */
+        }
+
+        .main-nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Center align items */
+            align-items: center;
+        }
+
+        .main-nav ul li {
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .main-nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        .main-nav ul ul {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            list-style-type: none;
+            padding: 10px;
+            top: 100%;
+            left: 0;
+            width: 150px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-nav ul ul li {
+            margin: 5px 0;
+        }
+
+        .main-nav ul li:hover > ul {
+            display: block;
+        }
+
+        /* Media query for responsive menu */
+        @media screen and (max-width: 768px) {
+            .main-nav ul {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                display: none;
+            }
+
+            .main-nav ul.open {
+                display: flex;
+            }
+
+            .main-nav ul li {
+                margin: 0;
+                width: 100%;
+                font-size: 27px;
+            }
+
+            .main-nav ul li a {
+                padding: 15px;
+                text-align: center;
+            }
+
+            .main-nav ul ul {
+                position: static;
+                width: auto;
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .hamburger-menu .fa{
+                font-size: 50px;
+            }
+           
+
+          
+        
+    </style>
+</head>
+<body>
+
+    <!-- Loading screen -->
+    <div class="loading-overlay">
+        <div class="loading-circle"></div>
+    </div>
+
+    <!-- JavaScript to hide loading screen after 7 seconds -->
+    <script>
+          window.addEventListener('load', function() {
+            setTimeout(function() {
+                var loadingOverlay = document.querySelector('.loading-overlay');
+                if (loadingOverlay) {
+                    loadingOverlay.style.display = 'none';
+                    document.body.style.overflow = 'visible'; // Show scrollbars
+                    document.querySelector('.content').style.display = 'block'; // Show content
+                }
+                // Add your code to append content to the body here if needed
+                // For example: document.body.innerHTML = '<h1>Your content here</h1>';
+            }, 7000); // 7 seconds
+        });
+    </script>
+   <div class="content">
+
+    <div class="header">
+        <p>Mapping the World with Precision <i class="fa fa-map-marker"></i> Kasarani, Nairobi, Kenya <i class="fa fa-phone"></i> +254707266538 <i class="fa fa-envelope"></i> anglepoint@co.ke</p>
+    </div>
+
+    <div class="header2">
+        <div class="logo">
+            <a href="#"><img src="logo.jpg"></a>
+        </div>
+        <div class="main-nav">
+            <div class="hamburger-menu">
+                <i class="fa fa-bars"></i>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="AboutUs.html">About Us</a></li>
+                <li>
+                    <a href="#">Projects <i class="fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="#section1">Projects</a></li>
+                        <li><a href="#section2">Ongoing projects</a></li>
+                        <li><a href="#section3">Training</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="search-icon">
+            <i class="fa fa-search"></i>
+        </div>
+
+        <div class="search-box" style="display: none;">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button id="searchButton">Search</button>
+        </div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+      const searchIcon = document.querySelector('.search-icon');
+      const searchBox = document.querySelector('.search-box');
+
+      searchIcon.addEventListener('click', function() {
+          // Toggle visibility of search box
+          if (searchBox.style.display === 'none') {
+              searchBox.style.display = 'block';
+          } else {
+              searchBox.style.display = 'none';
+          }
+      });
+
+      const searchButton = document.getElementById('searchButton');
+      const searchInput = document.getElementById('searchInput');
+
+      // Add event listener for search button click
+      searchButton.addEventListener('click', function() {
+          // Get the search query
+          const query = searchInput.value.trim().toLowerCase();
+
+          // Perform search functionality here
+          // You can implement the search logic based on your website content
+          // For example, you might want to search through the text content of elements
+
+          // Here's a simple example to alert the search query
+          alert('You searched for: ' + query);
+      });
+  });
+      </script>
+  </div>
+    </div>
+
+
+    <hr>
+
+    <div class="Logo2">
+        <!-- Inside the Logo2 div -->
+<div class="dropdown-arrow">
+    <i class="fa fa-angle-double-down"></i>
+</div>
+
+ <script>
+    // Inside the DOMContentLoaded event listener
+const dropdownArrow = document.querySelector('.dropdown-arrow');
+dropdownArrow.addEventListener('click', function() {
+    scrollToHeader3();
+});
+
+// Smooth scrolling function
+function scrollToHeader3() {
+    const header3 = document.querySelector('.header3');
+    header3.scrollIntoView({ behavior: 'smooth' });
+}
+
+ </script>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="content">
+        <!-- Your content goes here -->
+    </div>
+    <div class="header3">
+        <div class="distict">
+
+        </div>
+
+    </div>
+
+   <section id="section1" class="">
+     <h3>Projects</h3>
+    <div class="News searchable-content">
+
+        <div class="News">
+            <div class="news-slider">
+                <div class="news-container">
+
+                    <div class="news-item">
+                        <img src="GNSS.JPG" alt="Image Description">
+                        <h4>GNSS principles and use- Ministry of Statistics-Eritrea</h4>
+                        <p>Inquire for this project with us: <br><br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6">Enquire Now</a></p>
+                    </div>
+
+
+
+
+
+                    <div class="news-item">
+                        <img src="honey.JPG" alt="Image Description">
+                        <h4>Effects climate change on honey collection in Kilifi County </h4>
+                        <p>Inquire for this project with us: <br><br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6">Enquire Now</a></p>
+                    </div>
+
+                    <div class="news-item">
+                        <img src="Map1.jpg" alt="Image Description">
+                        <h4>Application of GIS on census and sample survey spatial data collection and mobile GIS and mapping- Eritrea</h4>
+                        <p>Inquire for this project with us: <br><br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6">Enquire Now</a></p>
+                    </div>
+                    <div class="news-item">
+                        <img src="Map1.jpg" alt="Image Description">
+                        <h4>Application of GIS on census and sample survey spatial data collection and mobile GIS and mapping- Eritrea</h4>
+                        <p>Inquire for this project with us: <br><br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6">Enquire Now</a></p>
+                    </div>
+
+                    <div class="news-item">
+                        <img src="honey.JPG" alt="Image Description">
+                        <h4>Effects climate change on honey collection in Kilifi County </h4>
+                        <p>Inquire for this project with us: <br><br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6">Enquire Now</a></p>
+                    </div>
+                    <div class="news-item">
+                        <img src="GNSS.JPG" alt="Image Description">
+                        <h4>GNSS principles and use- Ministry of Statistics-Eritrea</h4>
+                        <p>Inquire for this project with us: <br><br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6">Enquire Now</a></p>
+                    </div>
+                    <div class="news-item">
+                        <img src="honey.JPG" alt="Image Description">
+                        <h4>Effects climate change on honey collection in Kilifi County </h4>
+                        <p>Inquire for this project with us: <br><br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6">Enquire Now</a></p>
+                    </div>
+                    <div class="news-item">
+                        <img src="GNSS.JPG" alt="Image Description">
+                        <h4>GNSS principles and use- Ministry of Statistics-Eritrea</h4>
+                        <p>Inquire for this project with us: <br><br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6">Enquire Now</a></p>
+                    </div>
+
+                    <!-- Your news items here -->
+                </div>
+                <button class="arrow prev">&#10094;</button>
+                <button class="arrow next">&#10095;</button>
+            </div>
+        </div>
+
+
+    </div>
+
+   </section>
+
+
+
+
+<script>
+      document.addEventListener("DOMContentLoaded", function() {
+    const newsContainer = document.querySelector(".News .news-container");
+    const newsItems = document.querySelectorAll(".News .news-item");
+    const prevButton = document.querySelector(".arrow.prev");
+    const nextButton = document.querySelector(".arrow.next");
+    const newsItemWidth = newsItems[0].offsetWidth; // Width of a single news item
+    const visibleNewsItems = 4; // Number of visible news items at a time
+    const totalSlides = Math.ceil(newsItems.length / visibleNewsItems); // Total number of slides
+    let currentSlide = 1;
+
+    function showSlide(slideIndex) {
+        if (slideIndex < 1) {
+            currentSlide = totalSlides;
+        } else if (slideIndex > totalSlides) {
+            currentSlide = 1;
+        }
+
+        const startPosition = (currentSlide - 1) * visibleNewsItems;
+        const endPosition = Math.min(startPosition + visibleNewsItems, newsItems.length);
+
+        newsContainer.style.transform = `translateX(-${startPosition * newsItemWidth}px)`;
+    }
+
+    prevButton.addEventListener("click", function() {
+        showSlide(currentSlide - 1);
+    });
+
+    nextButton.addEventListener("click", function() {
+        showSlide(currentSlide + 1);
+    });
+
+    // Auto slide after every 3 seconds
+    setInterval(function() {
+        showSlide(currentSlide + 1);
+        console.log("Current Slide:", currentSlide);
+    }, 3000); // Change timing here to 3000 milliseconds for 3 seconds
+
+    // Show initial slide
+    showSlide(currentSlide);
+});
+</script>
+
+   <section id="section2" class="">
+    <div class="Onprojects">
+        <div class="Onprojects searchable-content">
+        </div>
+        <h3>Our Ongoimg Projects</h3>
+
+            <div class="project">
+                <div class="project-image">
+                    <img src="Project1.JPG" alt="Project Image">
+                </div>
+                <div class="project-content">
+                    <div class="project-description">
+                        <h4>Geospatial Analysis of Mortality Trends in Nandi County
+                        </h4> <br>
+                        <p>Through the lens of Geographic Information Systems (GIS), we are conducting a comprehensive analysis to understand the spatial distribution and trends of deaths within the region. By harnessing the power of geospatial data, our project aims to provide valuable insights for informed decision-making on the causes of mortality. Stay tuned for updates as we delve deeper into this vital research endeavor.  </p>
+                        <!-- Additional project details can be added here -->
+                    </div>
+                </div>
+            </div>
+            <div class="project">
+                <div class="project-image">
+                    <img src="Project2.JPG" alt="Project Image">
+                </div>
+                <div class="project-content">
+                    <div class="project-description">
+                        <h4>Mapping Bribery spots on Kenyan Roads
+                        </h4> <br>
+                        <p>Our latest initiative focuses on shedding light on the situation of bribery along Kenyan roads, particularly concerning interactions between motorists and traffic officers. Through crowdsourced data collection using ODK Collect, individuals like you have the power to contribute firsthand observations, pinpointing locations where these unethical practices occur.  </p>
+                        <!-- Additional project details can be added here -->
+                    </div>
+                </div>
+            </div>
+            <div class="project">
+                <div class="project-image">
+                    <img src="Project3.JPG" alt="Project Image">
+                </div>
+                <div class="project-content">
+                    <div class="project-description">
+                        <h4>Land Subsidence Characterization using GNSS and InSAR techniques in Nakuru County</h4> <br>
+                        <p>Land subsidence has been a major issue in Nakuru County in recent years. The region of Nakuru County, which is well-known for its high population density and urbanization, has undergone ground subsidence as a result of a number of reasons, including both natural and man-made ones. </p>
+                        <!-- Additional project details can be added here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat project container for each project -->
+
+    </div>
+
+
+
+   </section>
+   <section id="section3" class="">
+    <h3>Upcoming Trainings</h3>
+    <div class="training searchable-content">
+
+    <div class="training">
+        <div id="back-to-top" class="back-to-top">
+            <i class="fa fa-arrow-up"></i>
+        </div>
+        <script>
+             // JavaScript for smooth scrolling to top when back to top arrow is clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            var backToTopButton = document.getElementById('back-to-top');
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        </script>
+
+        <div class="training-item">
+            <img src="Training1.JPG" alt="Training Image">
+            <p>Mobile GIS and mapping (using COMMCARE, ODK) <br> Book now: <br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6 ">Book Now</a></p>
+        </div>
+        <div class="training-item">
+            <img src="Training2.JPG" alt="Training Image">
+            <p>Web GIS and Mapping <br> Book now:  <br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6 ">Book Now</a></p>
+        </div>
+        <div class="training-item">
+            <img src="Training3.JPG" alt="Training Image">
+            <p>Fundamentals of GIS <br> Book now:  <br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6 ">Book Now</a></p>
+        </div>
+        <div class="training-item">
+            <img src="Training4.JPG" alt="Training Image">
+            <p>Application of GIS in monitoring and evaluation <br> Book now:  <br><a href="https://forms.gle/mfgVt4tGCrKv8xHm6 ">Book Now</a></p>
+        </div>
+
+    </div>
+
+
+    </div>
+
+   </section>
+
+  
+
+   <footer class="footer">
+        <div class="container">
+            <div class="column">
+                <h3>Connect with Us</h3>
+                <h6>For more information or further Questions</h6>
+                <ul>
+                    <li>
+                        <a href="tel:+1234567890">
+                            <i class="fa fa-phone"></i>
+                            +1 234 567 890
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+1234567890">
+                            <i class="fa fa-envelope"></i>
+                            anglepoint@co.ke
+                         
+                        </a>
+                    <li>
+                        <a href="https://wa.me/1234567890">
+                            <i class="fa fa-whatsapp"></i>
+                            WhatsApp: +1 234 567 890
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class=""></i>
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-instagram"></i>
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-twitter"></i>
+                            Twitter
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-bar">
+                <p>&copy; 2024 Your Company. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+   <script>
+              document.addEventListener('DOMContentLoaded', function() {
+        const searchIcon = document.querySelector('.search-icon');
+        const searchBox = document.querySelector('.search-box');
+
+        searchIcon.addEventListener('click', function() {
+            // Toggle visibility of search box
+            if (searchBox.style.display === 'none') {
+                searchBox.style.display = 'block';
+            } else {
+                searchBox.style.display = 'none';
+            }
+        });
+
+        const searchButton = document.getElementById('searchButton');
+        const searchInput = document.getElementById('searchInput');
+
+        // Add event listener for search button click
+        searchButton.addEventListener('click', function() {
+            const query = searchInput.value.trim().toLowerCase();
+
+            // Retrieve sections on the page
+            const sections = document.querySelectorAll('.searchable');
+
+            // Loop through each section and search within its content
+            sections.forEach(function(section) {
+                // Retrieve elements with searchable content within the section
+                const searchableElements = section.querySelectorAll('.searchable-content');
+
+                // Loop through each element and check if it contains the search query
+                searchableElements.forEach(function(element) {
+                    const content = element.textContent.toLowerCase();
+                    if (content.includes(query)) {
+                        // Display or highlight the matching results
+                        element.style.backgroundColor = 'yellow'; // Example: Highlight matching elements
+                    } else {
+                        element.style.backgroundColor = ''; // Reset background color if not a match
+                    }
+                });
+            });
+        });
+    });
+        </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchIcon = document.querySelector('.search-icon');
+    const searchBox = document.querySelector('.search-box');
+
+    searchIcon.addEventListener('click', function() {
+        // Toggle visibility of search box
+        if (searchBox.style.display === 'none') {
+            searchBox.style.display = 'block';
+        } else {
+            searchBox.style.display = 'none';
+        }
+    });
+
+    // Other search functionality...
+});
+
+// Add event listener for search button click
+searchButton.addEventListener('click', function() {
+    const query = searchInput.value.trim().toLowerCase();
+
+    // Remove previous search highlights
+    document.querySelectorAll('.searchable-content').forEach(function(element) {
+        element.classList.remove('highlight');
+    });
+
+    // Retrieve sections on the page
+    const sections = document.querySelectorAll('.searchable');
+
+    // Loop through each section and search within its content
+    sections.forEach(function(section) {
+        // Retrieve elements with searchable content within the section
+        const searchableElements = section.querySelectorAll('.searchable-content');
+
+        // Loop through each element and check if it contains the search query
+        searchableElements.forEach(function(element) {
+            const content = element.textContent.toLowerCase();
+            if (content.includes(query)) {
+                // Display or highlight the matching results
+                element.classList.add('highlight');
+            }
+        });
+    });
+});
+
+
+</script>
+    <!-- Optional JavaScript to toggle navigation menu on small screens -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainNav = document.querySelector('.main-nav ul');
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+
+            hamburgerMenu.addEventListener('click', function() {
+                mainNav.classList.toggle('open');
+            });
+        });
+    </script>
+
+</body>
+</html>
